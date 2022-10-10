@@ -24,15 +24,15 @@ router.get('/',(req,res)=>{
 
 
 router.get("/verify",async(req,res)=>{
-    transporter.verify(function(error, success) {
-    if (error) {
-        res.send({"status":"failed"})
-        res.send(error)
-        console.log(error);
-    } else {
+    let response = await transporter.verify()
+    .then(()=>{
         res.send({"status":"success"})
         console.log("Server is ready to take our messages");
-    }
+    })
+    .catch(err => {
+        res.send({"status":"failed"})
+        res.send(err)
+        console.log(err);
     })
 })
 router.post("/sendOTP",async(req,res)=>{
