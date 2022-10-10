@@ -42,8 +42,8 @@ router.post("/sendOTP",async(req,res)=>{
     let mailOptions = {
         from:  `Snapwheels <support@snapwheels.online>`, // sender address
         to: body.email, // list of receivers
-        subject: `Security Alert: Your one-time sign in code is ${req.body.code}`, // Subject line
-        html: `<p>Please verify you're really you by entering this 4-digit code when you sign in. Just a heads up, this code will expire in 20 minutes for security reasons.</p><br /><h1>Your one-time code is: ${req.body.code}</h1>`, // html body
+        subject: `Security Alert: Your one-time sign in code is ${body.code}`, // Subject line
+        html: `<p>Please verify you're really you by entering this 4-digit code when you sign in. Just a heads up, this code will expire in 20 minutes for security reasons.</p><br /><h1>Your one-time code is: ${body.code}</h1>`, // html body
     }
 
     let data = await transporter.sendMail(mailOptions)
@@ -78,23 +78,23 @@ router.post("/sendOrderMail",async(req,res)=>{
         <table style="width:80%">
             <tr>
               <td style="border: 1px solid grey;">orderID</td>
-              <td style="border: 1px solid grey;">${req.body.orderID}</td>
+              <td style="border: 1px solid grey;">${body.orderID}</td>
             </tr>
             <tr>
               <td style="border: 1px solid grey;">Start Date</td>
-              <td style="border: 1px solid grey;">${req.body.startDate}</td>
+              <td style="border: 1px solid grey;">${body.startDate}</td>
             </tr>
             <tr>
                 <td style="border: 1px solid grey;">End Date</td>
-                <td style="border: 1px solid grey;">${req.body.endDate}</td>
+                <td style="border: 1px solid grey;">${body.endDate}</td>
             </tr>
             <tr>
                 <td style="border: 1px solid grey;">Home Delivery Opted</td>
-                <td style="border: 1px solid grey;">${req.body.homeDelivery}</td>
+                <td style="border: 1px solid grey;">${body.homeDelivery}</td>
             </tr>
             <tr>
                 <td style="border: 1px solid grey;">Total Bike Fare</td>
-                <td style="border: 1px solid grey;font-size: large;font-weight: bold;">${req.body.bikeFare}</td>
+                <td style="border: 1px solid grey;font-size: large;font-weight: bold;">${body.bikeFare}</td>
             </tr>
           </table>
           <h3 style="color:#009387">Wishing you a Happy and Safe ride</h3>
