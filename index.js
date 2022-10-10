@@ -10,6 +10,9 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.use('/mail',MailsRoute)
+app.get("/",(req,res)=>{
+    res.send("Welcome to snapwheels mailer app!")
+})
 
 const port = process.env.PORT || 8000;
 app.listen(port,()=>{
