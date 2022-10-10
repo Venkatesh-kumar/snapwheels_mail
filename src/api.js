@@ -22,13 +22,6 @@ router.get('/',(req,res)=>{
     res.send("Hello welcome to snapwheels netlify mailer")
 })
 
-transporter.verify(function(error, success) {
-    if (error) {
-      console.log(error);
-    } else {
-      console.log("Server is ready to take our messages");
-    }
-  });
 
 router.get("/verify",async(req,res)=>{
     transporter.verify(function(error, success) {
