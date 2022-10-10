@@ -37,32 +37,35 @@ router.get("/verify",async(req,res)=>{
     })
 })
 router.post("/sendOTP",async(req,res)=>{
+    var body = JSON.parse(req.body)
     var response = {"status":"failed"}
     let mailOptions = {
         from:  `Snapwheels <support@snapwheels.online>`, // sender address
-        to: req.body.email, // list of receivers
+        to: body.email, // list of receivers
         subject: `Security Alert: Your one-time sign in code is ${req.body.code}`, // Subject line
         html: `<p>Please verify you're really you by entering this 4-digit code when you sign in. Just a heads up, this code will expire in 20 minutes for security reasons.</p><br /><h1>Your one-time code is: ${req.body.code}</h1>`, // html body
     }
 
-    await transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            res.send(response)
-            console.log(error);
-        } else {
-            response = {"status":"success"}
-            res.send(response);
-            console.log('Email sent: ' + info.response);
-        }
+    let data = await transporter.sendMail(mailOptions)
+    .then((response)=>{
+        response = {"status":"success"}
+        res.send(response);
+        console.log('Email sent: ' + info.response);
+    })
+    .catch(error => {
+        res.send(response)
+        console.log(error);
     })
 })
 
+
 router.post("/sendOrderMail",async(req,res)=>{
-    console.log(req.body)
+    var body = JSON.parse(req.body)
+
     var response = {"status":"failed"}
     let mailOptions = {
         from:  `Snapwheels <support@snapwheels.online>`, // sender address
-        to: req.body.customerEmail, // list of receivers
+        to: body.customerEmail, // list of receivers
         subject: `Order Created: Thanks for booking your ride with Snapwheels`, // Subject line
         html:`<div style=" padding: 20px;margin-left: 5%;margin-right: 5%;">
         
@@ -107,15 +110,15 @@ router.post("/sendOrderMail",async(req,res)=>{
     </div>`, // html body
     }
 
-    await transporter.sendMail(mailOptions, function(error, info){
-        if (error) {
-            res.send(response)
-            console.log(error);
-        } else {
-            response = {"status":"success"}
-            res.send(response);
-            console.log('Email sent: ' + info.response);
-        }
+    let data = await transporter.sendMail(mailOptions)
+    .then((response)=>{
+        response = {"status":"success"}
+        res.send(response);
+        console.log('Email sent: ' + info.response);
+    })
+    .catch(error => {
+        res.send(response)
+        console.log(error);
     })
 })
 
