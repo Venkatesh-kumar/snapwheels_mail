@@ -8,13 +8,14 @@ const router = express.Router();
 
 let transporter = nodemailer.createTransport({
     host: "smtpout.secureserver.net",
-    service: 'Godaddy',
+    // service: 'Godaddy',
     port: 587,
     secure: false, // true for 465, false for other ports
-    ignoreTLS: true, // add this ,
     auth: {
-        user: process.env.EMAIL_USER, // generated ethereal user
-        pass: process.env.PASSWORD, // generated ethereal password
+        // user: process.env.EMAIL_USER, // generated ethereal user
+        // pass: process.env.PASSWORD, // generated ethereal password
+        user: "support@snapwheels.online", // generated ethereal user
+        pass: "Snapwheels1405", // generated ethereal password
     },
 });
 
