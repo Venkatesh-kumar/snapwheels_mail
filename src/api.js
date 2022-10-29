@@ -14,7 +14,7 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: process.env.EMAIL_USER, // generated ethereal user
         pass: process.env.PASSWORD, // generated ethereal password
-        // user: "support@snapwheels.online", // generated ethereal user
+        // user: "support@snapwheels.co.in", // generated ethereal user
         // pass: "Snapwheels1405", // generated ethereal password
     },
 });
@@ -40,7 +40,7 @@ router.post("/sendOTP",async(req,res)=>{
     var body = JSON.parse(req.body)
     var response = {"status":"failed"}
     let mailOptions = {
-        from:  `Snapwheels <support@snapwheels.online>`, // sender address
+        from:  `Snapwheels <support@snapwheels.co.in>`, // sender address
         to: body.email, // list of receivers
         subject: `Security Alert: Your one-time sign in code is ${body.code}`, // Subject line
         html: `<p>Please verify you're really you by entering this 4-digit code when you sign in. Just a heads up, this code will expire in 20 minutes for security reasons.</p><br /><h1>Your one-time code is: ${body.code}</h1>`, // html body
@@ -61,11 +61,14 @@ router.post("/sendOTP",async(req,res)=>{
 
 router.post("/sendOrderMail",async(req,res)=>{
     var body = JSON.parse(req.body)
-
+    var mailList = [
+        body.customerEmail,
+        'venkateshkumar1405@gmail.com'
+    ]
     var response = {"status":"failed"}
     let mailOptions = {
-        from:  `Snapwheels <support@snapwheels.online>`, // sender address
-        to: body.customerEmail, // list of receivers
+        from:  `Snapwheels <support@snapwheels.co.in>`, // sender address
+        to: mailList, // list of receivers
         subject: `Order Created: Thanks for booking your ride with Snapwheels`, // Subject line
         html:`<div style=" padding: 20px;margin-left: 5%;margin-right: 5%;">
         
@@ -106,7 +109,7 @@ router.post("/sendOrderMail",async(req,res)=>{
           
           <p>Your feedback will help us create a better experience for you and all our customers.</p>
           
-         <p> Please feel free to write to us at support@snapwheels.online</p>
+         <p> Please feel free to write to us at support@snapwheels.co.in</p>
     </div>`, // html body
     }
 
